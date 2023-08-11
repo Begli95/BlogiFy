@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -22,7 +23,8 @@ public class BlogController {
     @GetMapping("/blog")
     public ModelAndView blogMain() {
         ModelAndView modelAndView = new ModelAndView();
-        Iterable<Post> posts = postRepository.findAll();
+        ArrayList<Post> posts = (ArrayList<Post>) postRepository.findAll();
+        //Iterable<Post> posts = postRepository.findAll();
         modelAndView.addObject("posts", posts);
         modelAndView.setViewName("blog-main");
 
