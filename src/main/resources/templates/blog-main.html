@@ -13,6 +13,7 @@
               <div th:each="el : ${posts}" class="container mt-5 mb-5" style="background-color: rgb(219, 112, 147);">
                   <h3 th:text="${el.title}"></h3>
                   <p th:text="${el.anons}"></p>
+                  <p>Автор: <span th:text="${el.user.name}"></span></p>
                   <a th:href="'/blog/' + ${el.id}" class="btn btn-warning mt-2 mb-2">Детальнее</a>
               </div>
           </div>

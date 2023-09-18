@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Регистрация</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.bundle.min.js"></script>
+</head>
+<body  class="d-flex align-items-center py-4 bg-body-tertiary">
+<div class="container w-50 mt-5 d-flex flex-column align-items-center">
+    <img class="mb-4 mt-5" src="images/blogging.png" alt="" width="57" height="57">
+    <form action="/registration" method="post">
+
+        <h1 class="h3 mb-3 fw-normal">Пожалуйста, войдите</h1>
+
+        <div class="form-floating mb-2">
+            <input type="" class="form-control" id="floatingInput" placeholder="Виктор" name="name">
+            <label for="floatingInput">Имя</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Пароль" name="password">
+            <label for="floatingPassword">Пароль</label>
+        </div>
+
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <button class="btn mt-2 mb-2 btn-primary w-100 py-2" type="submit">Регистрация</button>
+    </form>
+    <div th:if="${errorMessage}" style="color: red;">
+        <h6 th:text="${errorMessage}"></h6>
+    </div>
+    <a href="/login" class="btn btn-link">войти</a>
+    <a href="/" class="btn btn-link">домой</a>
+</div>
+</body>
+</html>
