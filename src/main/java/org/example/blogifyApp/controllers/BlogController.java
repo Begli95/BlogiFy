@@ -1,9 +1,9 @@
-package org.example.photoApp.controllers;
+package org.example.blogifyApp.controllers;
 
-import org.example.photoApp.models.Post;
-import org.example.photoApp.models.User;
-import org.example.photoApp.repo.PostRepository;
-import org.example.photoApp.repo.UserRepository;
+import org.example.blogifyApp.models.Post;
+import org.example.blogifyApp.models.User;
+import org.example.blogifyApp.repo.PostRepository;
+import org.example.blogifyApp.repo.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 

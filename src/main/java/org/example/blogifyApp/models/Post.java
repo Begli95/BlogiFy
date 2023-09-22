@@ -1,4 +1,4 @@
-package org.example.photoApp.models;
+package org.example.blogifyApp.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

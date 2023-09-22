@@ -1,9 +1,8 @@
-package org.example.photoApp.controllers;
+package org.example.blogifyApp.controllers;
 
-import org.example.photoApp.models.Post;
-import org.example.photoApp.models.User;
-import org.example.photoApp.models.enums.Role;
-import org.example.photoApp.repo.UserRepository;
+import org.example.blogifyApp.models.User;
+import org.example.blogifyApp.models.enums.Role;
+import org.example.blogifyApp.repo.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
-package org.example.photoApp.repo;
+package org.example.blogifyApp.repo;
 
-import org.example.photoApp.models.User;
+import org.example.blogifyApp.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User,Long> {

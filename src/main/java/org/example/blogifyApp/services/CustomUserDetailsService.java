@@ -1,6 +1,6 @@
-package org.example.photoApp.services;
+package org.example.blogifyApp.services;
 
-import org.example.photoApp.repo.UserRepository;
+import org.example.blogifyApp.repo.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package org.example.photoApp.controllers;
+package org.example.blogifyApp.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

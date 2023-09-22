@@ -1,7 +1,7 @@
-package org.example.photoApp.models;
+package org.example.blogifyApp.models;
 
 import lombok.Data;
-import org.example.photoApp.models.enums.Role;
+import org.example.blogifyApp.models.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
