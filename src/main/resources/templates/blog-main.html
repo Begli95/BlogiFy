@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-          <title>Лучшая фотостудия</title>
+          <title>BlogiFy</title>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
           <link rel="stylesheet" href="css/bootstrap.min.css">
           <script src="js/bootstrap.bundle.min.js"></script>
@@ -9,12 +9,12 @@
     <body>
           <header th:insert="blocks/header :: header"></header>
           <div class="container">
-              <h1>Блог сайта</h1>
+              <h1>Website blog</h1>
               <div th:each="el : ${posts}" class="container mt-5 mb-5" style="background-color: rgb(219, 112, 147);">
                   <h3 th:text="${el.title}"></h3>
                   <p th:text="${el.anons}"></p>
                   <p>Автор: <span th:text="${el.user.name}"></span></p>
-                  <a th:href="'/blog/' + ${el.id}" class="btn btn-warning mt-2 mb-2">Детальнее</a>
+                  <a th:href="'/blog/' + ${el.id}" class="btn btn-warning mt-2 mb-2">details</a>
               </div>
           </div>
           <div th:insert="blocks/footer :: footer"></div>
