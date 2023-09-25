@@ -12,10 +12,11 @@
     <h1>Редактирование статьи</h1>
     <div th:each="el : ${post}">
         <form method="post">
-            <input type="text" th:value="${el.title}" name="title" placeholder="Enter the title of the article" class="form-control mb-2">
-            <input type="text" th:value="${el.anons}"name="anons" placeholder="Enter the title of the announcement" class="form-control mb-2">
-            <textarea type="text"  name="full_text" placeholder="Enter the text of the article" class="form-control mb-2" th:text="${el.full_text}"/>
+            <input type="text" th:value="${el.title}"         name="title" placeholder="Enter the title of the article" class="form-control mb-2">
+            <input type="text" th:value="${el.anons}"         name="anons" placeholder="Enter the title of the announcement" class="form-control mb-2">
+            <textarea type="text"  th:text="${el.full_text}"  name="full_text" placeholder="Enter the text of the article" class="form-control mb-2" />
             <button type="submit" class="btn btn-success">Update</button>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         </form>
     </div>
 </div>

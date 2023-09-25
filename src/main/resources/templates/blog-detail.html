@@ -13,9 +13,10 @@
         <h1 th:text="${el.title}"></h1>
         <p th:text="${el.full_text}"></p>
         <p th:text="'Просмотры: ' + ${el.views}"></p>
-        <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning">Редактировать</a>
+        <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
         <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
-            <button th:href="'/blog/' + ${el.id} + '/remove'" class="btn btn-warning mt-2" type="submit">Удалить</button>
+            <button th:href="'/blog/' + ${el.id} + '/remove'" class="btn btn-warning mt-2" type="submit">Delete</button>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         </form>
     </div>
 </div>

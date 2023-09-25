@@ -1,9 +1,10 @@
 package org.example.photoApp.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.example.photoApp.models.Post;
 import org.example.photoApp.models.User;
-import org.example.photoApp.repo.PostRepository;
-import org.example.photoApp.repo.UserRepository;
+import org.example.photoApp.services.BlogService;
+import org.example.photoApp.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +17,15 @@ import java.util.Optional;
 
 
 @Controller
+@RequiredArgsConstructor
 public class BlogController {
-    private final PostRepository postRepository;
-    private final UserRepository userRepository;
-
-    public BlogController(PostRepository postRepository, UserRepository userRepository) {
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
-    }
-
+    private final BlogService blogService;
+    private final UserService userService;
 
     @GetMapping("/blog")
     public ModelAndView blogMain() {
         ModelAndView modelAndView = new ModelAndView();
-        ArrayList<Post> posts = (ArrayList<Post>) postRepository.findAll();
-        //Iterable<Post> posts = postRepository.findAll();
+        ArrayList<Post> posts = blogService.getAllPosts();
         modelAndView.addObject("posts", posts);
         modelAndView.setViewName("blog-main");
         return modelAndView;
@@ -40,37 +35,20 @@ public class BlogController {
     public ModelAndView blogAdd(Model model, Authentication authentication) {
         ModelAndView blogAddModel = new ModelAndView();
         blogAddModel.setViewName("blog-add");
-        model.addAttribute("userMessage", "Пользователь  " + authentication.getName());
+        model.addAttribute("userMessage", "User  " + authentication.getName());
         return blogAddModel;
     }
 
     @PostMapping("/blog/add")
-    public String blogPostAdd(@RequestParam String title,
-                              @RequestParam String anons,
-                              @RequestParam String full_text,
-                              Model model, Principal principal) {
-        Post post = new Post(title, anons, full_text);
-        User user = getUserByPrincipal(principal);
-        post.setUser(user);
-        postRepository.save(post);
+    public String blogPostAdd(Post post, Model model, Principal principal) {
+        User user = userService.getUserByPrincipal(principal);
+        blogService.addBlogPost(post, user.getName());
         return "redirect:/blog";
-    }
-
-    public User getUserByPrincipal(Principal principal) {
-        if (principal == null) return new User();
-        return userRepository.findByName(principal.getName());
-    }
-
-    private Optional<Post> getPostById(long id) {
-        if (!postRepository.existsById(id)) {
-            return Optional.empty();
-        }
-        return postRepository.findById(id);
     }
 
     @GetMapping("/blog/{id}")
     public String blogDetail(@PathVariable(value = "id") long id, Model model) {
-        Optional<Post> post = getPostById(id);
+        Optional<Post> post = blogService.getPostById(id);
         if (!post.isPresent()) {
             return "redirect:/blog";
         }
@@ -79,8 +57,8 @@ public class BlogController {
     }
 
     @GetMapping("/blog/{id}/edit")
-    public String blogEdit(@PathVariable(value = "id") long id, Model model) {
-        Optional<Post> post = getPostById(id);
+    public String blogEdit(@PathVariable(value = "id") long id, Model model,Principal principal) {
+        Optional<Post> post = blogService.getPostById(id);
         if (!post.isPresent()) {
             return "redirect:/blog";
         }
@@ -89,25 +67,21 @@ public class BlogController {
     }
 
     @PostMapping("/blog/{id}/edit")
-    public String blogPostUpdate(
-            @PathVariable(value = "id") long id,
-            @RequestParam String title,
-            @RequestParam String anons,
-            @RequestParam String full_text,
-            Model model) {
-        Post post = postRepository.findById(id).orElseThrow();
-        post.setTitle(title);
-        post.setAnons(anons);
-        post.setFull_text(full_text);
-        postRepository.save(post);
+    public String blogPostUpdate(@PathVariable(value = "id") long id,
+                                 @RequestParam("title") String title,
+                                 @RequestParam("anons") String anons,
+                                 @RequestParam("full_text") String full_text,Principal principal) {
+        Optional<Post> existingPost = blogService.getPostById(id);
+        if (!existingPost.isPresent()) {
+            return "redirect:/blog";
+        }
+        blogService.editBlogPost(title,anons,full_text,id);
         return "redirect:/blog";
     }
 
     @PostMapping("/blog/{id}/remove")
-    public String blogPostRemove(
-            @PathVariable(value = "id") long id, Model model) {
-        Post post = postRepository.findById(id).orElseThrow();
-        postRepository.delete(post);
+    public String blogPostRemove(Post post, @PathVariable(value = "id") long id) {
+        blogService.removeBlogPost(id);
         return "redirect:/blog";
     }
 }

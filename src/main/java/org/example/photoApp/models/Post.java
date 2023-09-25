@@ -23,7 +23,7 @@ public class Post {
     @Column(name="views")
     private int views;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_name", referencedColumnName = "name")
     @JsonIgnore
     private User user;

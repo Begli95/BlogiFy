@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("title", "Фотостудия");
+        model.addAttribute("title", "BlogiFy");
         return "index";
     }
 
     @GetMapping("/about")
     public String about(Model model) {
-        model.addAttribute("title", "Страница про нас");
+        model.addAttribute("title", "page about us");
         return "about";
     }
 }
