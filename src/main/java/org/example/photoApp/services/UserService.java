@@ -17,19 +17,23 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean createUser(User user){
+    public boolean createUser(User user) {
         String name = user.getName();
-        if (userRepository.findByName(name) != null) { return false;}
-            user.setActive(true);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.getRoles().add(Role.ROLE_USER);
-            log.info("Saving new User with name: {}",name);
-            userRepository.save(user);
-            return true;
-    }
-    public User getUserByPrincipal(Principal principal) {
-        if (principal == null) return new User();
-        return userRepository.findByName(principal.getName());
+        if (userRepository.findByName(name) != null) {
+            return false;
+        }
+        user.setActive(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.getRoles().add(Role.ROLE_USER);
+        log.info("Saving new User with name: {}", name);
+        userRepository.save(user);
+        return true;
     }
 
+    public User getUserByPrincipal(Principal principal) {
+        if (principal == null) {
+            return new User();
+        }
+        return userRepository.findByName(principal.getName());
+    }
 }

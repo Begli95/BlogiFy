@@ -1,20 +1,22 @@
 <div th:fragment="header">
-  <div class="d-flex flex-column flex-md-row align-items-center p-4 pb-3 mb-4 border-bottom">
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Главная</a>
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/blog">Блог</a>
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/blog/add">Добавить статью</a>
-      <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">Про нас</a>
+    <div class="d-flex flex-column flex-md-row align-items-center p-4 pb-3 mb-4 border-bottom">
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Главная</a>
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/blog">Блог</a>
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/blog/add">Добавить статью</a>
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">Про нас</a>
 
-      <div class="me-3 py-1 link-body-emphasis text-decoration-none" th:if="${#authorization.expression('isAuthenticated()')}">
-        <form th:action="@{/logout}" method="post">
-          <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-          <button type="submit" class="btn btn-primary align-middle" style="line-height: 1;">Выйти</button>
-        </form>
-      </div>
-      <div class="me-3 py-1 link-body-emphasis text-decoration-none" th:if="${not #authorization.expression('isAuthenticated()')}">
-        <a class="btn btn-primary" th:href="@{/login}">Войти</a>
-      </div>
-    </nav>
-  </div>
+            <div class="me-3 py-1 link-body-emphasis text-decoration-none"
+                 th:if="${#authorization.expression('isAuthenticated()')}">
+                <form th:action="@{/logout}" method="post">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-primary align-middle" style="line-height: 1;">Выйти</button>
+                </form>
+            </div>
+            <div class="me-3 py-1 link-body-emphasis text-decoration-none"
+                 th:if="${not #authorization.expression('isAuthenticated()')}">
+                <a class="btn btn-primary" th:href="@{/login}">Войти</a>
+            </div>
+        </nav>
+    </div>
 </div>

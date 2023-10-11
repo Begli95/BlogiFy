@@ -8,7 +8,6 @@ import org.example.photoApp.repo.PostRepository;
 import org.example.photoApp.repo.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -22,6 +21,7 @@ public class BlogService {
     public ArrayList<Post> getAllPosts() {
         return (ArrayList<Post>) postRepository.findAll();
     }
+
     public void addBlogPost(Post post, String name) {
         User user = userRepository.findByName(name);
         post.setUser(user);
@@ -29,6 +29,7 @@ public class BlogService {
     }
 
     public void editBlogPost(String title, String anons, String fulltext, long id) {
+        //findById выбрасывает exception
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isPresent()) {
             Post existingPost = optionalPost.get();
@@ -50,12 +51,11 @@ public class BlogService {
             postRepository.delete(post);
         }
     }
+
     public Optional<Post> getPostById(long id) {
         if (!postRepository.existsById(id)) {
-            System.out.println("Не найдено");
             return Optional.empty();
         }
-        System.out.println("Нашел!");
         return postRepository.findById(id);
     }
 }

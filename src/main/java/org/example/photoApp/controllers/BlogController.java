@@ -57,7 +57,7 @@ public class BlogController {
     }
 
     @GetMapping("/blog/{id}/edit")
-    public String blogEdit(@PathVariable(value = "id") long id, Model model,Principal principal) {
+    public String blogEdit(@PathVariable(value = "id") long id, Model model, Principal principal) {
         Optional<Post> post = blogService.getPostById(id);
         if (!post.isPresent()) {
             return "redirect:/blog";
@@ -70,12 +70,12 @@ public class BlogController {
     public String blogPostUpdate(@PathVariable(value = "id") long id,
                                  @RequestParam("title") String title,
                                  @RequestParam("anons") String anons,
-                                 @RequestParam("full_text") String full_text,Principal principal) {
+                                 @RequestParam("full_text") String full_text, Principal principal) {
         Optional<Post> existingPost = blogService.getPostById(id);
         if (!existingPost.isPresent()) {
             return "redirect:/blog";
         }
-        blogService.editBlogPost(title,anons,full_text,id);
+        blogService.editBlogPost(title, anons, full_text, id);
         return "redirect:/blog";
     }
 
