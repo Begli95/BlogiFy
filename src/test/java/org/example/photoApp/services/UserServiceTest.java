@@ -29,7 +29,6 @@ class UserServiceTest {
         User user = new User();
         user.setName("Vasya");
 
-        //Mockito.doReturn(new User().setName("Vasya")).when(userRepository).findByName("Vasya");
         Mockito.when(userRepository.findByName("Vasya")).thenReturn(new User().setName("Vasya"));
         var actual = userService.createUser(user);
         var excepted = false;
